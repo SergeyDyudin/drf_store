@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% autoescape off %}
+    {% translate 'Hi' %}  {{ user.first_name }} {{ user.last_name }} ({{ user.email }}),
+
+    {% translate 'You add item' %} {{ data.item }} {% translate 'to cart.' %}
+    {% translate 'Price' %}: {{ data.item.price }}
+    {% translate 'Now you can paid your order: ' %}{{ cart_link|safe }}
+
+    {% translate 'Team' %} {{ current_site }}
+
+{% endautoescape %}

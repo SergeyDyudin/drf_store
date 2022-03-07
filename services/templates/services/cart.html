@@ -1,0 +1,44 @@
+{% extends 'root_site.html' %}
+{% load i18n %}
+
+{% block main-content %}
+    {% if invoice %}
+        <form>
+            {% csrf_token %}
+            <h1>{{ invoice }}</h1>
+            <p>{% translate 'Дата создания' %}: {{ invoice.date_created }}</p>
+            <p>{% translate 'Статус заказа' %}: {{ invoice.status }}</p>
+            <p>{% translate 'Сумма заказа' %}: {{ invoice.price_total }}</p>
+            <p>{% translate 'Вирутальная валюта пользователя' %}: {{ user.profile.currency }}</p>
+            <p>{% translate 'Итоговая цена' %}: {{ invoice.get_final_price_and_currency.0 }}</p>
+            {% if invoice.purchase_set %}
+                <h1>{% translate 'Покупка' %}: </h1>
+                {% for purchase in invoice.purchase_set.all %}
+                    <h1>{{ purchase.item.title }}</h1>
+                    <p>{% translate 'Количество' %}: {{ purchase.quantity }}</p>
+                    <p>{% translate 'Цена' %}: {{ purchase.item.price }}</p>
+                    <p>{% translate 'Фото' %}: {% if purchase.item.photo %}<img src="{{ purchase.item.photo.url }}" width="10%" alt="photo">{% endif %}</p>
+                    <p><input type="submit" formaction="{% url 'services:delete_service' 'purchase' purchase.pk %}"
+                              formmethod="post"
+                              value="{% translate 'Убрать из корзины' %}" name="_bye"></p>
+                {% endfor %}
+            {% endif %}
+            {% if invoice.rent_set %}
+                <h1>{% translate 'Аренда' %}: </h1>
+                {% for rent in invoice.rent_set.all %}
+                    <h1>{{ rent.item.title }}</h1>
+                    <p>{% translate 'Количество' %}: {{ rent.quantity }}</p>
+                    <p>{% translate 'Цена' %}: {{ rent.price }}</p>
+                    <p>{% translate 'Фото' %}:  {% if rent.item.photo %}<img src="{{ rent.item.photo.url }}" width="10%" alt="photo">{% endif %}</p>
+                    <p><input type="submit" formaction="{% url 'services:delete_service' 'rent' rent.pk %}"
+                              formmethod="post"
+                              value="{% translate 'Убрать из корзины' %}" name="_bye"></p>
+                {% endfor %}
+            {% endif %}
+            <p><input type="submit" formaction="#" formmethod="post"
+                      value="{% translate 'Оплатить покупки' %}" name="_bye"></p>
+        </form>
+    {% else %}
+        <h2>{% translate 'Корзина пуста' %}</h2>
+    {% endif %}
+{% endblock %}

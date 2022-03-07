@@ -1,0 +1,10 @@
+{% extends 'root_site.html' %}
+{% load i18n %}
+
+{% block main-content %}
+    <form>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" formmethod="post" value="{% translate 'Взять на прокат' %}" name="_rent"></p>
+    </form>
+{% endblock %}

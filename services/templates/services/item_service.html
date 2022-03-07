@@ -1,0 +1,7 @@
+{% load i18n %}
+
+<h2>{% translate 'Название' %}: {{ service.item.title }}</h2>
+<p><b>{% translate 'Покупка:' %}: </b></p>
+<p>{% translate 'Количество' %}: {{ service.quantity }}</p>
+<p>{% translate 'Цена' %}:{{ service.price }}</p>
+<p>{% translate 'Статус' %}: <b>{{ service.invoice.get_status_display }}</b></p>

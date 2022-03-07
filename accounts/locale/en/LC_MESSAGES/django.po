@@ -1,0 +1,350 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-02-28 10:08+0300\n"
+"PO-Revision-Date: 2022-01-31 11:18+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#: accounts/admin.py:15 accounts/models.py:81
+msgid "region"
+msgstr ""
+
+#: accounts/admin.py:16 accounts/models.py:82
+msgid "regions"
+msgstr ""
+
+#: accounts/admin.py:46
+msgid "profile"
+msgstr ""
+
+#: accounts/admin.py:47
+msgid "profiles"
+msgstr ""
+
+#: accounts/admin.py:68
+msgid "Personal info"
+msgstr ""
+
+#: accounts/admin.py:69
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:72
+msgid "Important dates"
+msgstr ""
+
+#: accounts/admin.py:97
+msgid "Email confirmed"
+msgstr ""
+
+#: accounts/apps.py:8
+msgid "Accounts"
+msgstr ""
+
+#: accounts/forms.py:28 accounts/forms.py:71 accounts/models.py:76
+msgid "Регион"
+msgstr "Region"
+
+#: accounts/forms.py:29 accounts/forms.py:72 accounts/models.py:105
+msgid "Телефон"
+msgstr "Phone"
+
+#: accounts/forms.py:30 accounts/forms.py:73
+msgid "День рождения"
+msgstr "Birthday"
+
+#: accounts/forms.py:31
+msgid "Виртуальная валюта"
+msgstr "Virtual currency"
+
+#: accounts/forms.py:45
+msgid "Тема"
+msgstr "Subject"
+
+#: accounts/forms.py:46
+msgid "Текст письма"
+msgstr "Text"
+
+#: accounts/forms.py:73
+msgid "Required. Format: YYYY-MM-DD"
+msgstr ""
+
+#: accounts/models.py:24
+msgid "first name"
+msgstr ""
+
+#: accounts/models.py:25
+msgid "last name"
+msgstr ""
+
+#: accounts/models.py:26
+msgid "email address"
+msgstr ""
+
+#: accounts/models.py:28
+msgid "staff status"
+msgstr ""
+
+#: accounts/models.py:30
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: accounts/models.py:33
+msgid "active"
+msgstr ""
+
+#: accounts/models.py:36
+msgid ""
+"Designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: accounts/models.py:40
+msgid "date joined"
+msgstr ""
+
+#: accounts/models.py:49
+msgid "user"
+msgstr ""
+
+#: accounts/models.py:50
+msgid "users"
+msgstr ""
+
+#: accounts/models.py:77
+msgid "Страна"
+msgstr "Country"
+
+#: accounts/models.py:106
+msgid "Birthday"
+msgstr ""
+
+#: accounts/models.py:108
+msgid "Virtual currency"
+msgstr ""
+
+#: accounts/models.py:109
+msgid "Email подтвержден"
+msgstr "Email confirmed"
+
+#: accounts/models.py:117
+msgid "Full name"
+msgstr ""
+
+#: accounts/templates/accounts/account.html:8
+msgid "Account"
+msgstr ""
+
+#: accounts/templates/accounts/account.html:11
+msgid "Book store"
+msgstr ""
+
+#: accounts/templates/accounts/account.html:39
+msgid "Save"
+msgstr ""
+
+#: accounts/templates/accounts/account.html:40
+#: accounts/templates/accounts/login.html:18
+msgid "Reset password"
+msgstr ""
+
+#: accounts/templates/accounts/account.html:41
+#: accounts/templates/admin/accounts/customuser/change_form_object_tools.html:5
+msgid "History"
+msgstr ""
+
+#: accounts/templates/accounts/account_activation_email.html:4
+msgid "Hi"
+msgstr ""
+
+#: accounts/templates/accounts/account_activation_email.html:6
+msgid "Please click on the link below to confirm your registration:"
+msgstr ""
+
+#: accounts/templates/accounts/account_activation_invalid.html:6
+msgid "Something is wrong."
+msgstr ""
+
+#: accounts/templates/accounts/account_activation_sent.html:6
+msgid "Please confirm your email address to complete the registration."
+msgstr ""
+
+#: accounts/templates/accounts/login.html:14
+#: accounts/templates/accounts/login.html:17
+msgid "Login"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:15
+msgid "Email"
+msgstr ""
+
+#: accounts/templates/accounts/login.html:16
+msgid "Password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:6
+#: accounts/templates/accounts/password_reset_confirm.html:7
+#: accounts/templates/accounts/password_reset_done.html:6
+#: accounts/templates/accounts/password_reset_form.html:6
+#: accounts/templates/admin/accounts/customuser/change_form.html:18
+msgid "Home"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:7
+#: accounts/templates/accounts/password_reset_done.html:7
+#: accounts/templates/accounts/password_reset_form.html:7
+msgid "Password reset"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:13
+msgid "Your password has been set.  You may go ahead and log in now."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_complete.html:15
+msgid "Log in"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:8
+msgid "Password reset confirmation"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:16
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:23
+msgid "New password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:28
+msgid "Confirm password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:31
+msgid "Change my password"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_confirm.html:37
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a new password reset."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_done.html:13
+msgid ""
+"We’ve emailed you instructions for setting your password, if an account "
+"exists with the email you entered. You should receive them shortly."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_done.html:15
+msgid ""
+"If you don’t receive an email, please make sure you’ve entered the address "
+"you registered with, and check your spam folder."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:2
+#, python-format
+msgid ""
+"You're receiving this email because you requested a password reset for your "
+"user account at %(site_name)s."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:4
+msgid "Please go to the following page and choose a new password:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:8
+msgid "Your username, in case you’ve forgotten:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:10
+msgid "Thanks for using our site!"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_email.html:12
+#, python-format
+msgid "The %(site_name)s team"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:13
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:19
+msgid "Email address:"
+msgstr ""
+
+#: accounts/templates/accounts/password_reset_form.html:22
+msgid "Reset my password"
+msgstr ""
+
+#: accounts/templates/accounts/registration.html:19
+msgid "Registration"
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form.html:21
+#: accounts/templates/admin/accounts/region/change_list_object_tools.html:8
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form.html:43
+msgid "Please correct the error below."
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form.html:43
+msgid "Please correct the errors below."
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form.html:49
+msgid "Send"
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form_object_tools.html:8
+#: accounts/views.py:65
+msgid "Send email"
+msgstr ""
+
+#: accounts/templates/admin/accounts/customuser/change_form_object_tools.html:10
+msgid "View on site"
+msgstr ""
+
+#: accounts/templates/admin/accounts/region/change_list_object_tools.html:13
+#, python-format
+msgid "Upload %(name)ss"
+msgstr ""
+
+#: accounts/views.py:36
+#, python-format
+msgid "Email sended to %(email)s."
+msgstr ""
+
+#: accounts/views.py:111
+msgid "Account page"
+msgstr ""
+
+#: accounts/views.py:141
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: accounts/views.py:149
+msgid "Войти"
+msgstr "Login"

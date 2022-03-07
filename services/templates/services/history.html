@@ -1,0 +1,12 @@
+{% extends 'root_site.html' %}
+{% load i18n %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} |
+    {{ site_title|default:_('History') }}{% endblock %}
+
+{% block main-content %}
+    <h1><b>{% translate 'Покупки' %}: </b></h1>
+    {% for service in service_list %}
+        {% include service.path_template %}
+    {% endfor %}
+{% endblock %}

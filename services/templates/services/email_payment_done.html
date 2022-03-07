@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% autoescape off %}
+    {% translate 'Hi' %}  {{ user.first_name }} {{ user.last_name }} ({{ user.email }}),
+
+    {% translate 'You paid the order' %}: №{{ invoice.pk }} - {% translate 'Total price' %}: {{ invoice.price_total }}
+    {% for purchase in invoice.purchase_set.all %}
+        {{ purchase.item.title }} x {{ purchase.quantity }}
+        {% translate 'Price' %}: {{ purchase.item.price }}
+    {% endfor %}
+
+    {% for rent in invoice.rent_set.all %}
+        {{ rent.item.title }} x {{ rent.quantity }}
+        {% translate 'Daily payment' %}: {{ rent.daily_payment }}
+        {% translate 'From' %} {{ rent.date_from }} - To {{ rent.date_to }}
+        {% translate 'Price' %}: {{ rent.price }}
+    {% endfor %}
+    {% translate 'Team' %} {{ current_site }}
+
+{% endautoescape %}

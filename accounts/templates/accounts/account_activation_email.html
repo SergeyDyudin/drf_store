@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% autoescape off %}
+{% translate 'Hi' %} {{ user.username }},
+
+{% translate 'Please click on the link below to confirm your registration:' %}
+
+http://{{ domain }}{% url 'accounts:activate_user' uidb64=uid token=token %}
+{% endautoescape %}

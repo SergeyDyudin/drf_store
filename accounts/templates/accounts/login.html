@@ -1,0 +1,23 @@
+{% extends 'root_site.html' %}
+
+{% load static i18n %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "accounts/css/auth.css" %}">
+{% endblock %}
+
+{% block content %}
+    <form class="box" action="" method="POST">
+        {% csrf_token%}
+        <h1>{% translate "Login" %}</h1>
+        <input type="text" name="email" placeholder={% translate "Email"%}>
+        <input type="password" name="password" placeholder={% translate "Password"%}>
+        <input type="submit" name="" value={% translate "Login" %}>
+        <a href="{% url 'accounts:password_reset' %}">{% translate "Reset password" %}</a>
+        {% for message in messages %}
+            <p style="color: white" id="messages">{{ message }}</p>
+        {% endfor %}
+      </form>
+{% endblock %}
