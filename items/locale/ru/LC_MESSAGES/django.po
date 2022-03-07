@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-28 10:08+0300\n"
+"POT-Creation-Date: 2022-03-07 21:18+0300\n"
 "PO-Revision-Date: 2022-01-31 11:35+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,313 +20,313 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: books/admin.py:20
+#: items/admin.py:20
 msgid "Enter title, price"
 msgstr "Введите название, цену"
 
-#: books/admin.py:29 books/models.py:37
+#: items/admin.py:29 items/models.py:37
 msgid "author"
 msgstr "автор"
 
-#: books/admin.py:30
+#: items/admin.py:30
 msgid "authors"
 msgstr "авторы"
 
-#: books/admin.py:38
+#: items/admin.py:38
 msgid "book"
 msgstr "книга"
 
-#: books/admin.py:39
+#: items/admin.py:39
 msgid "books"
 msgstr "книги"
 
-#: books/admin.py:60
+#: items/admin.py:60
 msgid "Enter title, price, author, publisher"
 msgstr "Введите название, цену, автора, издателя"
 
-#: books/admin.py:84
+#: items/admin.py:84
 msgid "Enter title, price, number of magazine"
 msgstr "Введите название, цену, номер журнала"
 
-#: books/admin.py:103
+#: items/admin.py:103
 msgid "Enter title, price, character, brand, model"
 msgstr "Введите название, цену, персонажа, брэнд, модель"
 
-#: books/admin.py:108
+#: items/admin.py:108
 msgid "Enter the name of brand"
 msgstr "Введите название брэнда"
 
-#: books/admin.py:121
+#: items/admin.py:121
 msgid "Enter the name of publisher"
 msgstr "Введите название издателя"
 
-#: books/apps.py:8 books/models.py:137
-msgid "Books"
-msgstr "Книги"
+#: items/apps.py:8 items/models.py:101
+msgid "Items"
+msgstr "Товары"
 
-#: books/models.py:12
+#: items/models.py:12
 msgid "Код"
 msgstr ""
 
-#: books/models.py:13 books/models.py:75
+#: items/models.py:13 items/models.py:75
 msgid "Название"
 msgstr ""
 
-#: books/models.py:17
+#: items/models.py:17
 msgid "Language"
 msgstr "Язык"
 
-#: books/models.py:18
+#: items/models.py:18
 msgid "Languages"
 msgstr "Языки"
 
-#: books/models.py:25 books/models.py:130
+#: items/models.py:25 items/models.py:130
 msgid "publisher"
 msgstr "издатель"
 
-#: books/models.py:26
+#: items/models.py:26
 msgid "address"
 msgstr "адрес"
 
-#: books/models.py:29
+#: items/models.py:29
 msgid "Publisher"
 msgstr "Издатель"
 
-#: books/models.py:30
+#: items/models.py:30
 msgid "Publishers"
 msgstr "Издатели"
 
-#: books/models.py:38 books/models.py:62 books/models.py:88
+#: items/models.py:38 items/models.py:62 items/models.py:88
 msgid "description"
 msgstr "описание"
 
-#: books/models.py:39
+#: items/models.py:39
 msgid "author's photo"
 msgstr "фото автора"
 
-#: books/models.py:42
+#: items/models.py:42
 msgid "Author"
 msgstr "автор"
 
-#: books/models.py:43
+#: items/models.py:43
 msgid "Authors"
 msgstr "авторы"
 
-#: books/models.py:50
+#: items/models.py:50
 msgid "genre"
 msgstr "жанр"
 
-#: books/models.py:53
+#: items/models.py:53
 msgid "Genre"
 msgstr "Жанр"
 
-#: books/models.py:54
+#: items/models.py:54
 msgid "Genres"
 msgstr "Жанры"
 
-#: books/models.py:61
+#: items/models.py:61
 msgid "category"
 msgstr "категория"
 
-#: books/models.py:67
+#: items/models.py:67
 msgid "Category"
 msgstr "Категория"
 
-#: books/models.py:68
+#: items/models.py:68
 msgid "Categories"
 msgstr "Категории"
 
-#: books/models.py:76 books/templates/books/detail/book.html:4
-#: books/templates/books/detail/figure.html:4
-#: books/templates/books/detail/item.html:5
-#: books/templates/books/detail/magazine.html:4
+#: items/models.py:76 items/templates/items/detail/book.html:4
+#: items/templates/items/detail/figure.html:4
+#: items/templates/items/detail/item.html:5
+#: items/templates/items/detail/magazine.html:4
 msgid "Описание"
 msgstr ""
 
-#: books/models.py:79
+#: items/models.py:79
 msgid "brand"
 msgstr "брэнд"
 
-#: books/models.py:80
+#: items/models.py:80
 msgid "brands"
 msgstr "брэнды"
 
-#: books/models.py:87
+#: items/models.py:87
 msgid "title"
 msgstr "название"
 
-#: books/models.py:90
+#: items/models.py:90
 msgid "count available"
 msgstr "доступное количество"
 
-#: books/models.py:91
+#: items/models.py:91
 msgid "price"
 msgstr "цена"
 
-#: books/models.py:92
+#: items/models.py:92
 msgid "photo"
 msgstr "фото"
 
-#: books/models.py:93
+#: items/models.py:93
 msgid "URL"
 msgstr ""
 
-#: books/models.py:100
+#: items/models.py:100
 msgid "Item"
-msgstr ""
+msgstr "Товар"
 
-#: books/models.py:101
-msgid "Items"
-msgstr ""
-
-#: books/models.py:129 books/models.py:147
+#: items/models.py:129 items/models.py:147
 msgid "language"
 msgstr "язык"
 
-#: books/models.py:131
+#: items/models.py:131
 msgid "year"
 msgstr "год"
 
-#: books/models.py:136
+#: items/models.py:136
 msgid "Book"
 msgstr "Книга"
 
-#: books/models.py:145
+#: items/models.py:137
+msgid "Books"
+msgstr "Книги"
+
+#: items/models.py:145
 msgid "date"
 msgstr "дата"
 
-#: books/models.py:146
+#: items/models.py:146
 msgid "magazine number"
 msgstr "номер журнала"
 
-#: books/models.py:152
+#: items/models.py:152
 msgid "magazine"
 msgstr "журнал"
 
-#: books/models.py:153
+#: items/models.py:153
 msgid "magazines"
 msgstr "журналы"
 
-#: books/models.py:160 books/templates/books/detail/figure.html:10
+#: items/models.py:160 items/templates/items/detail/figure.html:10
 msgid "Персонаж"
 msgstr ""
 
-#: books/models.py:162
+#: items/models.py:162
 msgid "Название модели"
 msgstr ""
 
-#: books/models.py:167
+#: items/models.py:167
 msgid "figure"
 msgstr "фигурка"
 
-#: books/models.py:168
+#: items/models.py:168
 msgid "figures"
 msgstr "фигурки"
 
-#: books/templates/books/categories.html:5
+#: items/templates/items/categories.html:5
 msgid "Все"
 msgstr ""
 
-#: books/templates/books/categories.html:11
+#: items/templates/items/categories.html:11
 msgid "There are no category present."
 msgstr "Категорий ещё  нет"
 
-#: books/templates/books/detail/book.html:5
-#: books/templates/books/detail/figure.html:5
-#: books/templates/books/detail/item.html:6
-#: books/templates/books/detail/magazine.html:5
-#: books/templates/books/item_list.html:19
+#: items/templates/items/detail/book.html:5
+#: items/templates/items/detail/figure.html:5
+#: items/templates/items/detail/item.html:6
+#: items/templates/items/detail/magazine.html:5
+#: items/templates/items/item_list.html:19
 msgid "Категории"
 msgstr ""
 
-#: books/templates/books/detail/book.html:6
-#: books/templates/books/detail/figure.html:6
-#: books/templates/books/detail/item.html:7
-#: books/templates/books/detail/magazine.html:6
+#: items/templates/items/detail/book.html:6
+#: items/templates/items/detail/figure.html:6
+#: items/templates/items/detail/item.html:7
+#: items/templates/items/detail/magazine.html:6
 msgid "Доступно для покупки"
 msgstr ""
 
-#: books/templates/books/detail/book.html:7
-#: books/templates/books/detail/figure.html:7
-#: books/templates/books/detail/item.html:8
-#: books/templates/books/detail/magazine.html:7
+#: items/templates/items/detail/book.html:7
+#: items/templates/items/detail/figure.html:7
+#: items/templates/items/detail/item.html:8
+#: items/templates/items/detail/magazine.html:7
 msgid "Фото"
 msgstr ""
 
-#: books/templates/books/detail/book.html:10
+#: items/templates/items/detail/book.html:10
 msgid "Автор"
 msgstr ""
 
-#: books/templates/books/detail/book.html:11
+#: items/templates/items/detail/book.html:11
 msgid "Жанр"
 msgstr ""
 
-#: books/templates/books/detail/book.html:12
-#: books/templates/books/detail/magazine.html:12
+#: items/templates/items/detail/book.html:12
+#: items/templates/items/detail/magazine.html:12
 msgid "Язык"
 msgstr ""
 
-#: books/templates/books/detail/book.html:13
+#: items/templates/items/detail/book.html:13
 msgid "Издатель"
 msgstr ""
 
-#: books/templates/books/detail/book.html:14
+#: items/templates/items/detail/book.html:14
 msgid "Год издания"
 msgstr ""
 
-#: books/templates/books/detail/book.html:16
-#: books/templates/books/detail/figure.html:14
-#: books/templates/books/detail/item.html:10
-#: books/templates/books/detail/magazine.html:14
-#: books/templates/books/item_list.html:18
+#: items/templates/items/detail/book.html:16
+#: items/templates/items/detail/figure.html:14
+#: items/templates/items/detail/item.html:10
+#: items/templates/items/detail/magazine.html:14
+#: items/templates/items/item_list.html:18
 msgid "Цена"
 msgstr ""
 
-#: books/templates/books/detail/figure.html:11
+#: items/templates/items/detail/figure.html:11
 msgid "Брэнд"
 msgstr ""
 
-#: books/templates/books/detail/figure.html:12
+#: items/templates/items/detail/figure.html:12
 msgid "Имя модели"
 msgstr ""
 
-#: books/templates/books/detail/magazine.html:10
+#: items/templates/items/detail/magazine.html:10
 msgid "Дата выхода"
 msgstr ""
 
-#: books/templates/books/detail/magazine.html:11
+#: items/templates/items/detail/magazine.html:11
 msgid "Номер выпуска"
 msgstr ""
 
-#: books/templates/books/item_detail.html:11
+#: items/templates/items/item_detail.html:11
 msgid "Количество"
 msgstr ""
 
-#: books/templates/books/item_detail.html:14
+#: items/templates/items/item_detail.html:14
 msgid "Купить"
 msgstr ""
 
-#: books/templates/books/item_detail.html:15
+#: items/templates/items/item_detail.html:15
 msgid "Взять на прокат"
 msgstr ""
 
-#: books/templates/books/item_list.html:23
+#: items/templates/items/item_list.html:23
 msgid "Подробнее"
 msgstr ""
 
-#: books/templates/books/item_list.html:25
+#: items/templates/items/item_list.html:25
 msgid "No item yet."
 msgstr "Товары отсутствуют"
 
-#: books/templates/books/types.html:10
+#: items/templates/items/types.html:10
 msgid "There are no type present."
 msgstr ""
 
-#: books/views.py:24
+#: items/views.py:24
 msgid "Книжный магазин"
 msgstr ""
 
-#: books/views.py:65
+#: items/views.py:65
 #, python-format
 msgid "No %(verbose_name)s found matching the query"
 msgstr ""

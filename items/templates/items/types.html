@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% if types %}
+    <ul class="nav nav-sidebar">
+    {% for type in types %}
+        <li><a href="{% url 'items:type' type %}">{{ type }}</a></li>
+    {% endfor %}
+
+{% else %}
+    <li> <strong >{% translate 'There are no type present.' %}</strong></li>
+
+    </ul>
+{% endif %}

@@ -20,11 +20,11 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: shop_edu/settings.py:136
+#: drf_store/settings.py:136
 msgid "Russian"
 msgstr ""
 
-#: shop_edu/settings.py:137
+#: drf_store/settings.py:137
 msgid "English"
 msgstr ""
 

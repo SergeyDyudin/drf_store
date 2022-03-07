@@ -1,0 +1,17 @@
+{% load i18n %}
+
+<h1><b>{{ object.title }}</b></h1>
+<p>{% translate 'Описание' %}: {{ object.description|linebreaks }}</p>
+<p>{% translate 'Категории' %}: {{ object.category.all|join:", " }}</p>
+<p>{% translate 'Доступно для покупки' %}: {{ object.count_available }}</p>
+<p>{% translate 'Фото' %}: {% if item.photo %}
+    <img src="{{ item.photo.url }}" width="10%" alt="photo">{% endif %}</p>
+
+<p>{% translate 'Автор' %}: {{ object.book.author.all|join:", " }}</p>
+<p>{% translate 'Жанр' %}: {{ object.book.genre.all|join:", " }}</p>
+<p>{% translate 'Язык' %}: {{ object.book.language }}</p>
+<p>{% translate 'Издатель' %}: {{ object.book.publisher }}</p>
+<p>{% translate 'Год издания' %}: {{ object.book.year }}</p>
+
+<p><b>{% translate 'Цена' %}: {{ object.price }}</b></p>
+

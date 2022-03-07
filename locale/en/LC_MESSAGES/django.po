@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: shop_edu/settings.py:136
+#: drf_store/settings.py:136
 msgid "Russian"
 msgstr ""
 
-#: shop_edu/settings.py:137
+#: drf_store/settings.py:137
 msgid "English"
 msgstr ""
 

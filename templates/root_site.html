@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+
+{% load items_extras services_extras i18n %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'items:home' %}">{{ site_header|default:_('Book store') }}</a></h1>
+{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+    <div class="content" style="display: flex; gap: 2rem;">
+        <section class="menu">
+            <section class="menu__type">
+                <h2>{% translate 'Товары' %}</h2>
+                {% list_type %}
+            </section>
+
+            <section class="menu__category">
+                <h2>{% translate 'Категории' %}</h2>
+                {% list_category user %}
+            </section>
+
+        </section>
+
+        <section class="main-content" style="width: 75%;">
+            {% block main-content %}{% endblock %}
+        </section>
+
+        <section class="account" style="right: 5em; position: absolute;">
+            {% if  request.user.id %}
+                <h3>Привет, {{ request.user.first_name }}</h3>
+                <p><a href="{% url 'accounts:account' request.user.id %}"> {% translate 'Account' %} </a></p>
+                <p><a href="{% url 'services:cart' %}"> {% translate 'Корзина' %} ({% count_items request.user %}) </a></p>
+                <a href="{% url 'accounts:logout' %}"> {% translate 'Выйти' %} </a><br>
+            {% else %}
+                <p><a href="{% url 'accounts:login' %}"> {% translate 'Login' %} </a></p>
+                <a href="{% url 'accounts:registration' %}"> {% translate 'Registration' %} </a>
+            {% endif %}
+            <form>
+                <br><br>
+                <p><input type="search" name="search_item" formaction="{% url 'items:home' %}" placeholder={% translate "Search" %}></p>
+            </form>
+        </section>
+    </div>
+{% endblock %}

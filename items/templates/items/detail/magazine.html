@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<h1><b>{{ object.title }}</b></h1>
+<p>{% translate 'Описание' %}: {{ object.description|linebreaks }}</p>
+<p>{% translate 'Категории' %}: {{ object.category.all|join:", " }}</p>
+<p>{% translate 'Доступно для покупки' %}: {{ object.count_available }}</p>
+<p>{% translate 'Фото' %}: {% if item.photo %}
+    <img src="{{ item.photo.url }}" width="10%" alt="photo">{% endif %}</p>
+
+<p>{% translate 'Дата выхода' %}:{{ object.magazine.date }}</p>
+<p>{% translate 'Номер выпуска' %}:{{ object.magazine.number }}</p>
+<p>{% translate 'Язык' %}: {{ object.magazine.language }}</p>
+
+<p><b>{% translate 'Цена' %}: {{ object.price }}</b></p>

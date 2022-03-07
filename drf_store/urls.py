@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('items.urls', namespace='items')),
     path('account/', include('accounts.urls', namespace='accounts')),
     path('service/', include('services.urls', namespace='services')),
+    path('api-auth/', include('rest_framework.urls')),
     path('__debug__/', include('debug_toolbar.urls')),
 ]

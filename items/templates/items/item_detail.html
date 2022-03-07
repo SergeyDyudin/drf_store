@@ -1,0 +1,17 @@
+{% extends "root_site.html" %}
+{% load i18n %}
+
+
+{% block main-content %}
+    <form action="{% url 'services:rent' object.pk %}">
+        {% csrf_token %}
+
+        {% include item_detail %}
+
+        <p><label for="quantity">{% translate 'Количество' %}: </label>
+            <input type="number" value="1" id="quantity" name="quantity" min="1">
+            <input type="submit" formaction="{% url 'services:purchase' object.pk %}" formmethod="post"
+                   value="{% translate 'Купить' %}" name="_purchase">
+            <input type="submit" value="{% translate 'Взять на прокат' %}" name="_rent"></p>
+    </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "root_site.html" %}
+{% load static i18n %}
+
+{% block breadcrumbs %}
+    <div class="breadcrumbs">
+        {#        <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>#}
+        {% if title %} &rsaquo; {{ title }}{% endif %}
+    </div>
+{% endblock %}
+
+{% block main-content %}
+    {% for item in item_list %}
+        <h2>{{ item.title }}</h2>
+        {% if item.photo %}
+            <img src="{{ item.photo.url }}" width="10%" alt="photo">
+        {% endif %}
+        <p>{{ item.description|truncatewords:30|linebreaks }}</p>
+        <p>{% translate 'Цена' %} - {{ item.price }}</p>
+        <p>{% translate 'Категории' %}:
+            {% for category in item.category.all %}
+                <a href="{% url 'items:category' category %}">{{ category }}</a>
+            {% endfor %}</p>
+        <a href="{{ item.get_absolute_url }}">{% translate 'Подробнее' %}</a><br><br>
+    {% empty %}
+        <p>{% translate 'No item yet.' %}</p>
+    {% endfor %}
+{% endblock %}
