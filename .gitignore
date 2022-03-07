@@ -1,3 +1,10 @@
+#
+.idea/
+.DS_Store
+
+# Projects folders
+logs/
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
