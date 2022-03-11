@@ -122,6 +122,13 @@ class Item(models.Model):
     def get_children_list(cls):
         return [child.__name__.lower() for child in cls.__subclasses__()]
 
+    @property
+    def get_type_item(self):
+        children = self.get_children_list()
+        for child in children:
+            if hasattr(self, child):
+                return child
+
 
 class Book(Item):
     author = models.ManyToManyField(to=Author)
