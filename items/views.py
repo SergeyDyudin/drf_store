@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
-from items.models import Language, Item, Book, Magazine, Figure, Category, Author, Genre, Publisher, Brand
+from items.models import Language, Item, Category, Author, Genre, Publisher, Brand
 from items.serializers import LanguageSerializer, ItemSerializer, GetBookSerializer, PostBookSerializer, \
     PostFigureSerializer, GetFigureSerializer, GetMagazineSerializer, PostMagazineSerializer, CategorySerializer, \
     AuthorSerializer, GenreSerializer, PublisherSerializer, BrandSerializer
@@ -133,7 +133,7 @@ class BookViewSet(ItemChildMixin, viewsets.ModelViewSet):
     #     return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
 
-class FigureViewSet(ItemChildMixin,viewsets.ModelViewSet):
+class FigureViewSet(ItemChildMixin, viewsets.ModelViewSet):
     """Доступные фигурки с учетом возрастных ограничений"""
     serializer_class = PostFigureSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
@@ -154,7 +154,7 @@ class FigureViewSet(ItemChildMixin,viewsets.ModelViewSet):
     #     return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
 
-class MagazineViewSet(ItemChildMixin,viewsets.ModelViewSet):
+class MagazineViewSet(ItemChildMixin, viewsets.ModelViewSet):
     """Доступные фигурки с учетом возрастных ограничений"""
     serializer_class = PostMagazineSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
