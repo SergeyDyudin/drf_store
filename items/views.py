@@ -49,7 +49,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
-
+# TODO: Сделать что-то с дублирующимися классами Book, Magazine, Figure (Item)
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     """Доступные товары с учетом возрастных ограничений"""
     serializer_class = ItemSerializer
@@ -98,7 +98,10 @@ class BookViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Book.objects.adult_control(self.request.user).prefetch_related('categories')
+        queryset = Book.objects.adult_control(self.request.user).prefetch_related('categories')
+        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+            return queryset.filter(categories__name=self.request.query_params.get('cat'))
+        return queryset
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
@@ -116,7 +119,10 @@ class FigureViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Figure.objects.adult_control(self.request.user).prefetch_related('categories')
+        queryset = Figure.objects.adult_control(self.request.user).prefetch_related('categories')
+        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+            return queryset.filter(categories__name=self.request.query_params.get('cat'))
+        return queryset
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
@@ -134,7 +140,10 @@ class MagazineViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
+        queryset = Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
+        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+            return queryset.filter(categories__name=self.request.query_params.get('cat'))
+        return queryset
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
