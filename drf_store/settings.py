@@ -240,6 +240,11 @@ LOGGING = {
     }
 }
 
+# List categories for adult
 ADULT_CATEGORIES = [cat.strip() for cat in os.getenv('ADULT_CATEGORIES', default='18+').split(',')]
 
+# Max user's discount for items
 MAX_DISCOUNT = float(os.getenv('MAX_DISCOUNT', default=0.3))
+
+# Prefix for api URL
+API_PREFIX_URL = os.getenv('API_PREFIX_URL')

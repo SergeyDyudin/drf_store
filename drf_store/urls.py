@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from drf_store import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls', namespace='accounts')),
@@ -24,3 +26,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('', include('items.urls', namespace='items')),
 ]
+
+# Add prefix api for url
+urlpatterns = [path(settings.API_PREFIX_URL, include(urlpatterns))]
