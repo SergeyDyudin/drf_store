@@ -1,3 +1,5 @@
+import rest_framework.exceptions
+from django.contrib.contenttypes.models import ContentType
 from rest_framework import viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
@@ -49,6 +51,7 @@ class BrandViewSet(viewsets.ModelViewSet):
     serializer_class = BrandSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
+
 # TODO: Сделать что-то с дублирующимися классами Book, Magazine, Figure (Item)
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     """Доступные товары с учетом возрастных ограничений"""
@@ -86,7 +89,30 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
         return obj
 
 
-class BookViewSet(viewsets.ModelViewSet):
+class ItemChildMixin:
+    """Получение queryset и serializer в соответствии с классом"""
+    def get_queryset(self):
+        self.model = self.get_model()
+        queryset = self.model.objects.adult_control(self.request.user).prefetch_related('categories')
+        if self.request.query_params.get('cat'):
+            queryset = self.filter_category(queryset, self.request.query_params.get('cat'))
+        return queryset
+
+    def get_serializer_class(self):
+        return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
+
+    def get_model(self):
+        return ContentType.objects.get(app_label='items', model=self.basename).model_class()
+
+    @staticmethod
+    def filter_category(queryset, category_id):
+        """Фильтрация queryset по указанной категории товаров"""
+        if category_id.isdigit() and Category.objects.filter(pk=category_id).exists():
+            return queryset.filter(categories__pk=category_id)
+        raise rest_framework.exceptions.NotFound()
+
+
+class BookViewSet(ItemChildMixin, viewsets.ModelViewSet):
     """Доступные книги с учетом возрастных ограничений"""
     serializer_class = PostBookSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
@@ -97,17 +123,17 @@ class BookViewSet(viewsets.ModelViewSet):
         'retrieve': GetBookSerializer,
     }
 
-    def get_queryset(self):
-        queryset = Book.objects.adult_control(self.request.user).prefetch_related('categories')
-        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
-            return queryset.filter(categories__name=self.request.query_params.get('cat'))
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Book.objects.adult_control(self.request.user).prefetch_related('categories')
+    #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+    #         return queryset.filter(categories__name=self.request.query_params.get('cat'))
+    #     return queryset
+    #
+    # def get_serializer_class(self):
+    #     return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
-    def get_serializer_class(self):
-        return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
-
-class FigureViewSet(viewsets.ModelViewSet):
+class FigureViewSet(ItemChildMixin,viewsets.ModelViewSet):
     """Доступные фигурки с учетом возрастных ограничений"""
     serializer_class = PostFigureSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
@@ -118,17 +144,17 @@ class FigureViewSet(viewsets.ModelViewSet):
         'retrieve': GetFigureSerializer,
     }
 
-    def get_queryset(self):
-        queryset = Figure.objects.adult_control(self.request.user).prefetch_related('categories')
-        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
-            return queryset.filter(categories__name=self.request.query_params.get('cat'))
-        return queryset
+    # def get_queryset(self):
+    #     queryset = Figure.objects.adult_control(self.request.user).prefetch_related('categories')
+    #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+    #         return queryset.filter(categories__name=self.request.query_params.get('cat'))
+    #     return queryset
+    #
+    # def get_serializer_class(self):
+    #     return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
-    def get_serializer_class(self):
-        return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
 
-
-class MagazineViewSet(viewsets.ModelViewSet):
+class MagazineViewSet(ItemChildMixin,viewsets.ModelViewSet):
     """Доступные фигурки с учетом возрастных ограничений"""
     serializer_class = PostMagazineSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
@@ -139,11 +165,11 @@ class MagazineViewSet(viewsets.ModelViewSet):
         'retrieve': GetMagazineSerializer,
     }
 
-    def get_queryset(self):
-        queryset = Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
-        if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
-            return queryset.filter(categories__name=self.request.query_params.get('cat'))
-        return queryset
-
-    def get_serializer_class(self):
-        return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
+    # def get_queryset(self):
+    #     queryset = Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
+    #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
+    #         return queryset.filter(categories__name=self.request.query_params.get('cat'))
+    #     return queryset
+    #
+    # def get_serializer_class(self):
+    #     return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
