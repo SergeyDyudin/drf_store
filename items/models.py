@@ -86,7 +86,7 @@ class Brand(models.Model):
 class Item(models.Model):
     title = models.CharField(_('title'), max_length=70)
     description = models.TextField(_('description'), blank=True)
-    category = models.ManyToManyField(to=Category, blank=True)
+    categories = models.ManyToManyField(to=Category, blank=True, verbose_name=_('Категории'))
     count_available = models.PositiveSmallIntegerField(_('count available'), default=0, blank=False)
     price = models.PositiveIntegerField(_('price'))
     photo = models.ImageField(verbose_name=_('photo'), upload_to='items/photo/', blank=True, null=True)

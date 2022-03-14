@@ -13,7 +13,7 @@ class ItemsListView(ListView):
     ]
 
     def get(self, request, *args, **kwargs):
-        self.queryset = Item.objects.adult_control(self.request.user).prefetch_related('category')
+        self.queryset = Item.objects.adult_control(self.request.user).prefetch_related('categories')
         if self.request.GET.get('search_item', False):
             self.queryset = self.queryset.filter(title__icontains=self.request.GET['search_item'])
         return super(ItemsListView, self).get(request, *args, **kwargs)

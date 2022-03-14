@@ -16,7 +16,7 @@ class AdultFilteredItems(ControlAdultMixin, models.Manager):
         result = super(AdultFilteredItems, self).get_queryset()
         if self.user_is_adult(user):
             return result
-        return result.exclude(category__name__in=ADULT_CATEGORIES)
+        return result.exclude(categories__name__in=ADULT_CATEGORIES)
 
 
 class AdultFilteredCategory(ControlAdultMixin, models.Manager):

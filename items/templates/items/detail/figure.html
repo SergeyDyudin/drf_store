@@ -2,7 +2,7 @@
 
 <h1><b>{{ object.title }}</b></h1>
 <p>{% translate 'Описание' %}: {{ object.description|linebreaks }}</p>
-<p>{% translate 'Категории' %}: {{ object.category.all|join:", " }}</p>
+<p>{% translate 'Категории' %}: {{ object.categories.all|join:", " }}</p>
 <p>{% translate 'Доступно для покупки' %}: {{ object.count_available }}</p>
 <p>{% translate 'Фото' %}: {% if item.photo %}
     <img src="{{ item.photo.url }}" width="10%" alt="photo">{% endif %}</p>

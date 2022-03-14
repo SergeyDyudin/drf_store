@@ -55,12 +55,12 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ItemSerializer
 
     def get_queryset(self):
-        queryset = Item.objects.adult_control(self.request.user).prefetch_related('category')
+        queryset = Item.objects.adult_control(self.request.user).prefetch_related('categories')
         if self.request.query_params.get('search_item', False):
             queryset = queryset.filter(title__icontains=self.request.query_params['search_item'])
         elif self.request.query_params.get('cat') and \
                 (not self.request.query_params.get('cat') == 'Все'):
-            return queryset.filter(category__name=self.request.query_params.get('cat'))
+            return queryset.filter(categories__name=self.request.query_params.get('cat'))
         return queryset
 
     def get_object(self, queryset=None):
@@ -98,7 +98,7 @@ class BookViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Book.objects.adult_control(self.request.user).prefetch_related('category')
+        return Book.objects.adult_control(self.request.user).prefetch_related('categories')
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
@@ -116,7 +116,7 @@ class FigureViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Figure.objects.adult_control(self.request.user).prefetch_related('category')
+        return Figure.objects.adult_control(self.request.user).prefetch_related('categories')
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
@@ -134,7 +134,7 @@ class MagazineViewSet(viewsets.ModelViewSet):
     }
 
     def get_queryset(self):
-        return Magazine.objects.adult_control(self.request.user).prefetch_related('category')
+        return Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)

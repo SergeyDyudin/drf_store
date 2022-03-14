@@ -9,7 +9,7 @@ class ItemAdmin(admin.ModelAdmin):
         'slug': ('title', )
     }
     filter_horizontal = [
-        'category'
+        'categories'
     ]
     list_display = [
         'title',
@@ -53,7 +53,7 @@ class BookAdmin(admin.ModelAdmin):
     ]
     filter_horizontal = [
         'genre',
-        'category'
+        'categories'
     ]
     autocomplete_fields = ['publisher']
     search_fields = ('title', 'price', 'author__name', 'publisher__name')
@@ -73,7 +73,7 @@ class MagazineAdmin(admin.ModelAdmin):
         'slug': ('title', 'date')
     }
     filter_horizontal = [
-        'category'
+        'categories'
     ]
     list_display = [
         'title',
@@ -97,7 +97,7 @@ class FigureAdmin(admin.ModelAdmin):
         'brand'
     ]
     filter_horizontal = [
-        'category'
+        'categories'
     ]
     search_fields = ('title', 'price', 'character', 'brand__name', 'model_name')
     search_help_text = _('Enter title, price, character, brand, model')

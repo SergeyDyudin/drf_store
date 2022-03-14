@@ -58,7 +58,7 @@ class BrandSerializer(serializers.ModelSerializer):
 
 
 class GetBookSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
     author = AlterAuthorSerializer(many=True)
     genre = AlterGenreSerializer(many=True)
     language = LanguageSerializer()
@@ -70,7 +70,7 @@ class GetBookSerializer(serializers.ModelSerializer):
 
 
 class PostBookSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
     author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), many=True)
     genre = serializers.PrimaryKeyRelatedField(queryset=Genre.objects.all(), many=True)
     language = serializers.PrimaryKeyRelatedField(queryset=Language.objects.all())
@@ -83,7 +83,7 @@ class PostBookSerializer(serializers.ModelSerializer):
 
 class GetFigureSerializer(serializers.ModelSerializer):
     brand = BrandSerializer()
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
 
     class Meta:
         model = Figure
@@ -100,7 +100,7 @@ class PostFigureSerializer(serializers.ModelSerializer):
 
 class GetMagazineSerializer(serializers.ModelSerializer):
     language = LanguageSerializer()
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
 
     class Meta:
         model = Magazine
@@ -116,7 +116,7 @@ class PostMagazineSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(many=True)
+    categories = CategorySerializer(many=True)
     type = serializers.CharField(source='get_type_item', read_only=True)
 
     class Meta:
@@ -128,6 +128,6 @@ class ItemSerializer(serializers.ModelSerializer):
             'count_available',
             'price', 'photo',
             'slug',
-            'category',
+            'categories',
             'type'
         ]
