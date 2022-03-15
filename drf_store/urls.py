@@ -19,13 +19,16 @@ from django.urls import path, include
 from drf_store import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('account/', include('accounts.urls', namespace='accounts')),
     path('service/', include('services.urls', namespace='services')),
     path('api-auth/', include('rest_framework.urls')),
-    path('__debug__/', include('debug_toolbar.urls')),
     path('', include('items.urls', namespace='items')),
 ]
 
 # Add prefix api for url
 urlpatterns = [path(settings.API_PREFIX_URL, include(urlpatterns))]
+
+urlpatterns += [
+    path('admin/', admin.site.urls),
+    path('__debug__/', include('debug_toolbar.urls')),
+]
