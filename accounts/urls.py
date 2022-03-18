@@ -8,7 +8,7 @@ from .views import CustomUserViewSet, ProfileViewSet
 
 app_name = 'accounts'
 
-router = routers.DefaultRouter()
+router = routers.SimpleRouter()
 router.register(r'users', CustomUserViewSet, basename='user')
 router.register(r'profiles', ProfileViewSet, basename='profile')
 
