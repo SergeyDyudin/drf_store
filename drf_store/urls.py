@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from drf_store import settings
 
@@ -22,6 +23,8 @@ urlpatterns = [
     path('account/', include('accounts.urls', namespace='accounts')),
     path('service/', include('services.urls', namespace='services')),
     path('api-auth/', include('rest_framework.urls')),
+    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('', include('items.urls', namespace='items')),
 ]
 

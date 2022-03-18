@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     "debug_toolbar",
     'rest_framework',
+    'rest_framework_simplejwt',
 
     'accounts.apps.AccountsConfig',
     'items.apps.ItemsConfig',
@@ -248,3 +249,10 @@ MAX_DISCOUNT = float(os.getenv('MAX_DISCOUNT', default=0.3))
 
 # Prefix for api URL
 API_PREFIX_URL = os.getenv('API_PREFIX_URL')
+
+# DJANGO REST FRAMEWORK settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
