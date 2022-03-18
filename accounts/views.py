@@ -7,6 +7,8 @@ from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.utils.translation import gettext_lazy as _
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 
 from accounts.forms import SendEmailForm
 from accounts.models import CustomUser, Profile
@@ -30,6 +32,11 @@ class CustomUserViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         return self.MAP_ACTION_TO_SERIALIZER.get(self.action, self.serializer_class)
+
+    @action(methods=['post'], detail=False, permission_classes=[AllowAny])
+    def registration(self, request):
+        """Регистрация нового пользователя"""
+        return self.create(request)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
