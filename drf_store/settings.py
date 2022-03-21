@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 
     'accounts.apps.AccountsConfig',
     'items.apps.ItemsConfig',
@@ -221,11 +222,6 @@ LOGGING = {
         }
     },
     'loggers': {
-        # 'drf_store': {
-        #     'level': 'DEBUG',
-        #     'handlers': ['console', 'file', 'mail_admins'],
-        #     'propagate': True,
-        # },
         'accounts': {
             'level': 'DEBUG',
             'handlers': ['console', 'file', 'mail_admins'],

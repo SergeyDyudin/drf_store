@@ -2,13 +2,18 @@ import logging
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.utils.translation import gettext_lazy as _
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
+from rest_framework_simplejwt.tokens import RefreshToken
 
 from accounts.forms import SendEmailForm
 from accounts.models import CustomUser, Profile
@@ -37,6 +42,21 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     def registration(self, request):
         """Регистрация нового пользователя"""
         return self.create(request)
+
+    @action(methods=['post'], detail=False, permission_classes=[IsAuthenticated])
+    def logout(self, request):
+        """Logout user"""
+        try:
+            user_id = request.auth.payload['user_id']
+            tokens = OutstandingToken.objects.filter(user_id=user_id)
+            for token in tokens:
+                RefreshToken(token).blacklist()
+        except KeyError:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        except TokenError:
+            pass
+
+        return Response(data={"Logout": "OK"}, status=status.HTTP_205_RESET_CONTENT)
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
