@@ -157,7 +157,8 @@ class ChangePasswordSerializer(serializers.Serializer):
 
     def save(self, **kwargs):
         password = self.validated_data['new_password1']
-        user = kwargs['user']
-        user.set_password(password)
-        user.save()
+        user = kwargs.get('user')
+        if user:
+            user.set_password(password)
+            user.save()
         return user
