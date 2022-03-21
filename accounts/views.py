@@ -2,15 +2,15 @@ import logging
 
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.http import urlsafe_base64_decode
 from django.views.generic import FormView
 from django.utils.translation import gettext_lazy as _
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
+from rest_framework.decorators import action, api_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.reverse import reverse
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.token_blacklist.models import OutstandingToken
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -19,7 +19,8 @@ from accounts.forms import SendEmailForm
 from accounts.models import CustomUser, Profile
 from accounts.permissions import UserPermission
 from accounts.serializers import GetCustomUserSerializer, PostCustomUserSerializer, \
-    PostProfileSerializer, GetProfileSerializer
+    PostProfileSerializer, GetProfileSerializer, ChangePasswordSerializer
+from accounts.tokens import account_activation_token
 
 logger = logging.getLogger(__name__)
 
@@ -42,6 +43,14 @@ class CustomUserViewSet(viewsets.ModelViewSet):
     def registration(self, request):
         """Регистрация нового пользователя"""
         return self.create(request)
+
+    @action(methods=['PATCH'], detail=True, permission_classes=[UserPermission], serializer_class=ChangePasswordSerializer)
+    def change_password(self, request, pk=None):
+        user = self.get_object()
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save(user=user)
+        return Response({"Password": f"Changed for id {user.id}"}, status=status.HTTP_200_OK)
 
     @action(methods=['post'], detail=False, permission_classes=[IsAuthenticated])
     def logout(self, request):
@@ -120,3 +129,22 @@ class SendEmailView(SuccessMessageMixin, PermissionRequiredMixin, FormView):
             'has_editable_inline_admin_formsets': False,
             'has_delete_permission': False,
         }
+
+
+@api_view()
+def activate_user(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64)
+        user = CustomUser.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
+        user = None
+        logger.error(f'Invalid uid user for activation')
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        logger.info(f'Activate user {user}')
+        return Response(data={"Activation": "Success"}, status=status.HTTP_200_OK)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

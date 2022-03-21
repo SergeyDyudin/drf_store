@@ -14,13 +14,9 @@ router.register(r'profiles', ProfileViewSet, basename='profile')
 
 urlpatterns = [
     path('', include(router.urls)),
-    # path('<int:pk>', views.AccountView.as_view(), name='account'),
-    # path('login/', views.LoginView.as_view(), name='login'),
-    # path('logout/', views.LogoutView.as_view(), name='logout'),
-    # path('registration/', views.RegistrationView.as_view(), name='registration'),
     # path('account_activation_sent/', views.account_activation_sent, name='account_activation_sent'),
-    # re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,40})/$',
-    #         views.activate_user, name='activate_user'),
+    re_path(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,40})/$',
+            views.activate_user, name='activate_user'),
 
     path('password_reset/',
          auth_view.PasswordResetView.as_view(
