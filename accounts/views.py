@@ -44,7 +44,8 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         """Регистрация нового пользователя"""
         return self.create(request)
 
-    @action(methods=['PATCH'], detail=True, permission_classes=[UserPermission], serializer_class=ChangePasswordSerializer)
+    @action(methods=['PATCH'], detail=True, permission_classes=[UserPermission],
+            serializer_class=ChangePasswordSerializer)
     def change_password(self, request, pk=None):
         user = self.get_object()
         serializer = self.get_serializer(data=request.data)
