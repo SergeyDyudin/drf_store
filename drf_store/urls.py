@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from drf_store import settings
+
+router = DefaultRouter()
 
 urlpatterns = [
     path('account/', include('accounts.urls', namespace='accounts')),
@@ -25,7 +28,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('', include('items.urls', namespace='items')),
+    path('items', include('items.urls', namespace='items')),
+    path('', include(router.urls))
 ]
 
 # Add prefix api for url
