@@ -126,8 +126,24 @@ class ItemSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'count_available',
-            'price', 'photo',
+            'price',
+            'photo',
             'slug',
             'categories',
+            'type'
+        ]
+
+
+class AlterItemSerializer(serializers.ModelSerializer):
+    type = serializers.CharField(source='get_type_item', read_only=True)
+
+    class Meta:
+        model = Item
+        fields = [
+            'id',
+            'title',
+            'price',
+            'photo',
+            'slug',
             'type'
         ]

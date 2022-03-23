@@ -60,15 +60,15 @@ class Invoice(models.Model):
 
     def get_final_price_and_currency(self):
         """
-        Evaluate final_price = price - currency and new_currency
+        Evaluate final_price(= price - currency) and new_currency
         :return: (final_price, new_currency)
         """
-        max_discount = self.price_total*settings.MAX_DISCOUNT
+        max_discount = self.price_total * settings.MAX_DISCOUNT
         bound_price = self.price_total - max_discount
         diff = max_discount - self.user_id.profile.currency
         if diff >= 0:
             return bound_price + diff, 0
-        return bound_price, diff*(-1)
+        return bound_price, diff * (-1)
 
     @property
     def user_profile(self):
@@ -130,11 +130,3 @@ class Rent(Service):
     class Meta:
         verbose_name = _('rent')
         verbose_name_plural = _('rents')
-
-    # @property
-    # def price(self):
-    #     if hasattr(self, '_price'):
-    #         return self._price
-    #     if not (self.date_to and self.date_from):
-    #         raise ValueError('Date_to or date_from are not specified')
-    #     return self.quantity * ((self.date_to - self.date_from).days + 1) * self.daily_payment
