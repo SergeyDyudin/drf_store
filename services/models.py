@@ -90,12 +90,6 @@ class Service(models.Model):
     def __str__(self):
         return f'[{self.invoice.status}]-{self.item.title}'
 
-    # @property
-    # def price(self):
-    #     if hasattr(self, '_price'):
-    #         return self._price
-    #     return self.item.price * self.quantity
-
     def delete(self, using=None, keep_parents=False):
         self.item.count_available += self.quantity
         self.item.save()

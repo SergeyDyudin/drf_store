@@ -10,6 +10,7 @@ class PurchaseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Purchase
         fields = [
+            'id',
             'item',
             'invoice',
             'quantity',
@@ -23,6 +24,7 @@ class RentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rent
         fields = [
+            'id',
             'item',
             'invoice',
             'quantity',
