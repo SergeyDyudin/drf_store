@@ -9,6 +9,9 @@ router = routers.DefaultRouter()
 router.register(r'history', views.HistoryViewSet, basename='history')
 router.register(r'cart', views.CartViewSet, basename='cart')
 
+router.routes[0].mapping['patch'] = 'pay_the_cart'
+router.routes[0].mapping['put'] = 'pay_the_cart'
+
 urlpatterns = [
     path('', include(router.urls)),
     # path('cart/', views.CartView.as_view(), name='cart'),

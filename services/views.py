@@ -1,11 +1,10 @@
 import logging
-from itertools import chain
 
-from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
-from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, ListModelMixin
+from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, ListModelMixin, UpdateModelMixin
 from rest_framework.permissions import DjangoObjectPermissions
 from rest_framework.response import Response
 
@@ -40,6 +39,26 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
         """Вывести корзину пользователя"""
         invoice = self.get_object()
         serializer = self.get_serializer(invoice)
+        return Response(serializer.data)
+
+    # @action(methods=['PUT', 'PATCH'], detail=False)
+    def pay_the_cart(self, request, *args):
+        """Оплата корзины"""
+        instance = self.get_object()
+        data = {
+            'status': Invoice.InvoiceStatuses.PAID.value,
+            'status_updated': timezone.now()
+        }
+
+        serializer = self.get_serializer(instance, data=data, partial=True)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
         return Response(serializer.data)
 
     @action(methods=['DELETE'], detail=False, url_path=r'delete_service/(?P<pk>\d+)')
