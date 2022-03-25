@@ -33,6 +33,7 @@ class AlterPurchaseSerializer(serializers.ModelSerializer):
 
 class RentSerializer(serializers.ModelSerializer):
     item = AlterItemSerializer()
+    price = serializers.SerializerMethodField()
 
     class Meta:
         model = Rent
@@ -45,6 +46,21 @@ class RentSerializer(serializers.ModelSerializer):
             'date_from',
             'date_to',
             'daily_payment',
+            'price'
+        ]
+
+    def get_price(self, obj):
+        return obj.price
+
+
+class CreateRentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Rent
+        fields = [
+            'item',
+            'date_from',
+            'date_to',
         ]
 
 

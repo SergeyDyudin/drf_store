@@ -244,6 +244,9 @@ ADULT_CATEGORIES = [cat.strip() for cat in os.getenv('ADULT_CATEGORIES', default
 # Max user's discount for items
 MAX_DISCOUNT = float(os.getenv('MAX_DISCOUNT', default=0.3))
 
+# Percent of price for rent of item per day
+PERCENT_OF_PRICE = float(os.getenv('PERCENT_OF_PRICE', default=0.1))
+
 # Prefix for api URL
 API_PREFIX_URL = os.getenv('API_PREFIX_URL')
 

@@ -7,10 +7,9 @@ from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.response import Response
 
-from items.models import Item
 from services.models import Invoice, Purchase, Rent
-from services.serializers import InvoiceSerializer, AlterPurchaseSerializer
-from services.services import pay_the_cart, create_purchase
+from services.serializers import InvoiceSerializer, AlterPurchaseSerializer, CreateRentSerializer
+from services.services import pay_the_cart, create_purchase, create_rent, get_data_for_rent
 
 logger = logging.getLogger(__name__)
 
@@ -93,15 +92,37 @@ class PurchaseViewSet(viewsets.GenericViewSet, CreateModelMixin):
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
-        serializer = AlterPurchaseSerializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        item = get_object_or_404(Item, pk=serializer.data['item'])
-        quantity = int(serializer.data['quantity'])
-
         try:
-            create_purchase(request, item, quantity)
+            create_purchase(request, serializer.data)
             return Response({'create': 'OK'}, status=status.HTTP_201_CREATED)
         except ValueError as e:
             return Response({'error': e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
+
+class RentViewSet(viewsets.GenericViewSet, CreateModelMixin):
+    """Аренда товара"""
+    serializer_class = CreateRentSerializer
+    permission_classes = [IsAuthenticated]
+
+    def retrieve(self, request, pk=None):
+        data, daily_payment = get_data_for_rent(pk)
+
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+
+        result = serializer.data
+        result.update(daily_payment)
+        return Response(result)
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        try:
+            create_rent(request, serializer.data)
+            return Response({'create': 'OK'}, status=status.HTTP_201_CREATED)
+        except ValueError as e:
+            return Response({'error': e.args[0]}, status=status.HTTP_400_BAD_REQUEST)

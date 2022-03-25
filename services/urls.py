@@ -12,17 +12,17 @@ urlpatterns = [
         'get': 'list',
         'patch': 'update',
         'put': 'update',
-        'delete': 'delete_service',
     }), name='cart'),
     path('cart/<int:pk>/', views.CartViewSet.as_view(actions={
         'delete': 'delete_service'
     }), name='cart-delete-service'),
     path('purchase/', views.PurchaseViewSet.as_view(actions={
         'post': 'create',
-    }), name='purchase')
-    # path('cart/', views.CartView.as_view(), name='cart'),
-    # path('purchase/<int:pk>', views.PurchaseView.as_view(), name='purchase'),
-    # path('rent/<int:pk>', views.RentView.as_view(), name='rent'),
-    # path('cart/delete/<str:service>/<int:pk>', views.delete_service, name='delete_service'),
-    # path('history/', views.HistoryListView.as_view(), name='history_services'),
+    }), name='purchase'),
+    path('rent/', views.RentViewSet.as_view(actions={
+        'post': 'create',
+    }), name='rent'),
+    path('rent/<int:pk>/', views.RentViewSet.as_view(actions={
+        'get': 'retrieve',
+    }), name='rent-get')
 ]
