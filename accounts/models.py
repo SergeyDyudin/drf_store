@@ -101,7 +101,7 @@ class Region(models.Model):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(to=CustomUser, on_delete=models.CASCADE)
+    user = models.OneToOneField(to=CustomUser, related_name='profile', on_delete=models.CASCADE)
     phone = models.CharField(_('Телефон'), max_length=20, validators=[validate_phone], blank=True)
     birthday = models.DateField(_('Birthday'), blank=True, null=True)
     region = models.ForeignKey(to=Region, blank=True, null=True, on_delete=models.SET_NULL)
