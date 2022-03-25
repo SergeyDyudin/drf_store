@@ -14,6 +14,9 @@ urlpatterns = [
         'put': 'update',
         'delete': 'delete_service',
     }), name='cart'),
+    path('cart/<int:pk>/', views.CartViewSet.as_view(actions={
+        'delete': 'delete_service'
+    }), name='cart-delete-service'),
     path('purchase/', views.PurchaseViewSet.as_view(actions={
         'post': 'create',
     }), name='purchase')
