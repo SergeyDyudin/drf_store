@@ -1,15 +1,16 @@
 import logging
 
-from django.utils import timezone
+from django.db import transaction
 from rest_framework import viewsets, status
-from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
-from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, ListModelMixin, UpdateModelMixin
-from rest_framework.permissions import DjangoObjectPermissions
+from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.response import Response
 
+from items.models import Item
 from services.models import Invoice, Purchase, Rent
-from services.serializers import InvoiceSerializer
+from services.serializers import InvoiceSerializer, AlterPurchaseSerializer
+from services.services import pay_the_cart, create_purchase
 
 logger = logging.getLogger(__name__)
 
@@ -34,25 +35,25 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
         self.check_object_permissions(self.request, invoice)
         return invoice
 
-    # @action(methods=['GET'], detail=False, url_path='get')
     def list(self, request, *args, **kwargs):
         """Вывести корзину пользователя"""
         invoice = self.get_object()
         serializer = self.get_serializer(invoice)
         return Response(serializer.data)
 
-    # @action(methods=['PUT', 'PATCH'], detail=False)
-    def pay_the_cart(self, request, *args):
+    @transaction.atomic
+    def update(self, request, *args):
         """Оплата корзины"""
         instance = self.get_object()
-        data = {
-            'status': Invoice.InvoiceStatuses.PAID.value,
-            'status_updated': timezone.now()
-        }
 
-        serializer = self.get_serializer(instance, data=data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        try:
+            pay_the_cart(request, instance)
+        except Exception:
+            logger.error('Оплата не прошла', exc_info=True)
+            return Response({'error': 'Payment failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        instance.refresh_from_db()
+        serializer = self.get_serializer(instance)
 
         if getattr(instance, '_prefetched_objects_cache', None):
             # If 'prefetch_related' has been applied to a queryset, we need to
@@ -61,7 +62,6 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
 
         return Response(serializer.data)
 
-    @action(methods=['DELETE'], detail=False, url_path=r'delete_service/(?P<pk>\d+)')
     def delete_service(self, request, pk=None):
         """Удалить сервис по id из корзины"""
         service_type = request.query_params.get('service')
@@ -78,9 +78,30 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
 class HistoryViewSet(viewsets.GenericViewSet, ListModelMixin):
     """История покупок пользователя"""
     serializer_class = InvoiceSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Invoice.objects.\
             filter(user_id=self.request.user.id).\
             exclude(status=Invoice.InvoiceStatuses.CANCELED.value).\
             order_by('-status_updated')
+
+
+class PurchaseViewSet(viewsets.GenericViewSet, CreateModelMixin):
+    """Покупка товара"""
+    serializer_class = AlterPurchaseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = AlterPurchaseSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        item = get_object_or_404(Item, pk=serializer.data['item'])
+        quantity = int(serializer.data['quantity'])
+
+        try:
+            create_purchase(request, item, quantity)
+            return Response({'create': 'OK'}, status=status.HTTP_201_CREATED)
+        except ValueError as e:
+            return Response({'error': e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
+

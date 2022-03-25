@@ -18,6 +18,19 @@ class PurchaseSerializer(serializers.ModelSerializer):
         ]
 
 
+class AlterPurchaseSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Purchase
+        fields = ['item', 'quantity']
+
+    def validate_quantity(self, value):
+        """Проверка количество больше нуля"""
+        if value < 1:
+            raise serializers.ValidationError('Quantity must be greater than zero')
+        return value
+
+
 class RentSerializer(serializers.ModelSerializer):
     item = AlterItemSerializer()
 
@@ -36,8 +49,8 @@ class RentSerializer(serializers.ModelSerializer):
 
 
 class InvoiceSerializer(serializers.ModelSerializer):
-    purchase_set = PurchaseSerializer(many=True, required=False)
-    rent_set = RentSerializer(many=True, required=False)
+    purchase_set = PurchaseSerializer(many=True, required=False, read_only=True)
+    rent_set = RentSerializer(many=True, required=False, read_only=True)
     status = serializers.ChoiceField(Invoice.InvoiceStatuses.choices)
     final_price = serializers.SerializerMethodField()
 
