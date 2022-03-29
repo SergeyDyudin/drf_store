@@ -9,8 +9,8 @@ urlpatterns = [
         'get': 'list'
     }), name='history'),
     path('cart/', views.CartViewSet.as_view(actions={
-        'get': 'list',
-        'patch': 'update',
+        'get': 'get_cart',
+        'patch': 'partial_update',
         'put': 'update',
     }), name='cart'),
     path('cart/<int:pk>/', views.CartViewSet.as_view(actions={

@@ -34,7 +34,7 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
         self.check_object_permissions(self.request, invoice)
         return invoice
 
-    def list(self, request, *args, **kwargs):
+    def get_cart(self, request, *args, **kwargs):
         """Вывести корзину пользователя"""
         invoice = self.get_object()
         serializer = self.get_serializer(invoice)
@@ -60,6 +60,9 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
             instance._prefetched_objects_cache = {}
 
         return Response(serializer.data)
+
+    def partial_update(self, request, *args):
+        return self.update(request, *args)
 
     def delete_service(self, request, pk=None):
         """Удалить сервис по id из корзины"""
