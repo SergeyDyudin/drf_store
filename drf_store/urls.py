@@ -15,12 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
+from rest_framework.schemas import get_schema_view
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from drf_store import settings
 
 router = DefaultRouter()
+
+schema_view = get_schema_view(
+    title="Book store",
+    description="API for book store",
+    version="1.0.0"
+)
 
 urlpatterns = [
     path('account/', include('accounts.urls', namespace='accounts')),
@@ -28,7 +36,12 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('items', include('items.urls', namespace='items')),
+    path('items/', include('items.urls', namespace='items')),
+    path('openapi', schema_view, name='openapi-schema'),
+    path('swagger-ui/', TemplateView.as_view(
+            template_name='swagger/swagger-ui.html',
+            extra_context={'schema_url': 'openapi-schema'}
+        ), name='swagger-ui'),
     path('', include(router.urls))
 ]
 
