@@ -289,7 +289,7 @@ paths:
   /api/account/users/registration/:
     post:
       operationId: registrationCustomUser
-      summary: "Создать пользоватателя"
+      summary: "Создать пользователя"
       description: "Регистрация нового пользователя"
       parameters: []
       requestBody:
