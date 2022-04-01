@@ -1,9 +1,11 @@
 import rest_framework.exceptions
 from django.contrib.contenttypes.models import ContentType
-from rest_framework import viewsets
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, filters
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
+from items.filters import ItemFilter
 from items.models import Language, Item, Category, Author, Genre, Publisher, Brand
 from items.serializers import LanguageSerializer, ItemSerializer, GetBookSerializer, PostBookSerializer, \
     PostFigureSerializer, GetFigureSerializer, GetMagazineSerializer, PostMagazineSerializer, CategorySerializer, \
@@ -56,14 +58,13 @@ class BrandViewSet(viewsets.ModelViewSet):
 class ItemViewSet(viewsets.ReadOnlyModelViewSet):
     """Доступные товары с учетом возрастных ограничений"""
     serializer_class = ItemSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_class = ItemFilter
+    search_fields = ['title']
+    ordered_fields = ['price']
 
     def get_queryset(self):
         queryset = Item.objects.adult_control(self.request.user).prefetch_related('categories')
-        if self.request.query_params.get('search_item', False):
-            queryset = queryset.filter(title__icontains=self.request.query_params['search_item'])
-        elif self.request.query_params.get('cat') and \
-                (not self.request.query_params.get('cat') == 'Все'):
-            return queryset.filter(categories__name=self.request.query_params.get('cat'))
         return queryset
 
     def get_object(self, queryset=None):
