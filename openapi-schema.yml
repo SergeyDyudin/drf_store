@@ -1451,7 +1451,38 @@ paths:
         \u0432\u0430\u0440\u044B \u0441 \u0443\u0447\u0435\u0442\u043E\u043C \u0432\
         \u043E\u0437\u0440\u0430\u0441\u0442\u043D\u044B\u0445 \u043E\u0433\u0440\u0430\
         \u043D\u0438\u0447\u0435\u043D\u0438\u0439"
-      parameters: []
+      parameters:
+        - in: query
+          name: ordering
+          schema:
+            type: string
+            enum: [price, -price]
+          description: "Сортировка по возрастанию или убыванию цены"
+          required: false
+        - in: query
+          name: search
+          schema:
+            type: string
+          description: "Поиск items по title"
+          required: false
+        - in: query
+          name: categories__name
+          schema:
+            type: string
+          description: "Фильтрация по категории"
+          required: false
+        - in: query
+          name: max_price
+          schema:
+            type: integer
+          description: "Фильтрация по максимальной цене"
+          required: false
+        - in: query
+          name: min_price
+          schema:
+            type: integer
+          description: "Фильтрация по минимальной цене"
+          required: false
       responses:
         "200":
           content:
