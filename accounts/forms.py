@@ -1,5 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordResetForm
+from django.db import ProgrammingError, connection
+
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser, Profile, Region
@@ -66,7 +68,10 @@ class LoginForm(forms.Form):
 
 
 class RegistrationForm(UserCreationForm):
-    CHOICES = list(Region.objects.all())
+    if 'accounts_region' in connection.introspection.table_names():
+        CHOICES = list(Region.objects.all())
+    else:
+        CHOICES = []
     CHOICES = zip(CHOICES, CHOICES)
     region = forms.CharField(label=_('Регион'), widget=forms.Select(choices=CHOICES), required=False)
     phone = forms.CharField(label=_('Телефон'), max_length=80, required=False)

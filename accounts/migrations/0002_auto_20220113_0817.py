@@ -4,10 +4,25 @@ import csv
 from django.db import migrations
 
 
+def import_from_csv(apps, file_name: str):
+    """
+    Import regions from csv to database
+    :param file_name:
+    :return:
+    """
+    Region = apps.get_model('accounts', 'Region')
+    with open(file_name) as file:
+        reader = csv.reader(file)
+        return Region.objects.bulk_create(
+            [Region(region=row[2], country='Россия') for row in reader][1:],
+            ignore_conflicts=True
+        )
+
+
 def upload_regions(apps, schema_editor):
     Region = apps.get_model('accounts', 'Region')
     db_alias = schema_editor.connection.alias
-    Region.import_from_csv('accounts/region.csv')
+    import_from_csv(apps, 'accounts/region.csv')
 
 
 def delete_regions(apps, schema_editor):
