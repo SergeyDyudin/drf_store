@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from items.serializers import AlterItemSerializer
+from items.serializers import ItemServiceSerializer
 from services.models import Invoice, Purchase, Rent
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
-    item = AlterItemSerializer()
+    item = ItemServiceSerializer()
 
     class Meta:
         model = Purchase
@@ -26,13 +26,13 @@ class AlterPurchaseSerializer(serializers.ModelSerializer):
 
     def validate_quantity(self, value):
         """Проверка количество больше нуля"""
-        if value < 1:  # TODO:
+        if value <= 0:
             raise serializers.ValidationError('Quantity must be greater than zero')
         return value
 
 
 class RentSerializer(serializers.ModelSerializer):
-    item = AlterItemSerializer()
+    item = ItemServiceSerializer()
     price = serializers.SerializerMethodField()
 
     class Meta:

@@ -90,7 +90,7 @@ class InvoiceAdmin(admin.ModelAdmin):
         )
 
 
-class PurchaseAdmin(admin.ModelAdmin):  # TODO:
+class ServiceAdmin(admin.ModelAdmin):
     readonly_fields = [
         'price'
     ]
@@ -117,31 +117,12 @@ class PurchaseAdmin(admin.ModelAdmin):  # TODO:
         return obj.price
 
 
-class RentAdmin(admin.ModelAdmin):
-    readonly_fields = [
-        'price'
-    ]
-    autocomplete_fields = [
-        'item',
-        'invoice',
-    ]
-    list_display = [
-        'item',
-        'status_invoice',
-        'quantity',
-    ]
-    search_fields = [
-        'item__title'
-    ]
-    search_help_text = 'Enter item'
+class PurchaseAdmin(ServiceAdmin):
+    ...
 
-    @admin.display(description=_('Status'))
-    def status_invoice(self, obj):
-        return obj.invoice.status
 
-    @admin.display(description=_('Price'))
-    def price(self, obj):
-        return obj.price
+class RentAdmin(ServiceAdmin):
+    ...
 
 
 admin.site.register(Purchase, PurchaseAdmin)

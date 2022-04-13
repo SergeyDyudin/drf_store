@@ -38,10 +38,12 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('items/', include('items.urls', namespace='items')),
     path('openapi', schema_view, name='openapi-schema'),
-    path('swagger-ui/', TemplateView.as_view(
-            template_name='swagger/swagger-ui.html',
-            extra_context={'schema_url': 'openapi-schema'}
-        ), name='swagger-ui'),  # TODO:
+    path('swagger-ui/',
+         TemplateView.as_view(
+             template_name='swagger/swagger-ui.html',
+             extra_context={'schema_url': 'openapi-schema'}
+         ),
+         name='swagger-ui'),
     path('', include(router.urls))
 ]
 

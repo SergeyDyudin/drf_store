@@ -1,68 +1,101 @@
 from rest_framework import serializers
 
-from items.models import Language, Item, Category, Book, Author, Genre, Publisher, Brand, Figure, Magazine  # TODO:
+from items.models import Author, Book, Brand, Category, Genre, Item, Publisher, Figure, Magazine, Language
 
 
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
-        fields = '__all__'  # TODO:
+        fields = [
+            'id',
+            'code',
+            'name',
+        ]
 
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'description',
+        ]
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'description',
+            'photo',
+        ]
 
 
-class AlterAuthorSerializer(serializers.ModelSerializer):  # TODO:
+class ShortAuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ['id', 'name']
+        fields = [
+            'id',
+            'name',
+        ]
 
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+        ]
 
 
-class AlterGenreSerializer(serializers.ModelSerializer):  # TODO:
+class ShortGenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['id', 'name']
+        fields = [
+            'id',
+            'name',
+        ]
 
 
 class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'address',
+        ]
 
 
-class AlterPublisherSerializer(serializers.ModelSerializer):  # TODO:
+class ShortPublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
-        fields = ['id', 'name']
+        fields = [
+            'id',
+            'name'
+        ]
 
 
 class BrandSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brand
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'description',
+        ]
 
 
 class GetBookSerializer(serializers.ModelSerializer):
     categories = CategorySerializer(many=True)
-    author = AlterAuthorSerializer(many=True)
-    genre = AlterGenreSerializer(many=True)
+    author = ShortAuthorSerializer(many=True)
+    genre = ShortGenreSerializer(many=True)
     language = LanguageSerializer()
-    publisher = AlterPublisherSerializer()
+    publisher = ShortPublisherSerializer()
 
     class Meta:
         model = Book
@@ -134,7 +167,7 @@ class ItemSerializer(serializers.ModelSerializer):
         ]
 
 
-class AlterItemSerializer(serializers.ModelSerializer):   # TODO:
+class ItemServiceSerializer(serializers.ModelSerializer):
     type = serializers.CharField(source='get_type_item', read_only=True)
 
     class Meta:
