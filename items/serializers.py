@@ -1,12 +1,12 @@
 from rest_framework import serializers
 
-from items.models import Language, Item, Category, Book, Author, Genre, Publisher, Brand, Figure, Magazine
+from items.models import Language, Item, Category, Book, Author, Genre, Publisher, Brand, Figure, Magazine  # TODO:
 
 
 class LanguageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Language
-        fields = '__all__'
+        fields = '__all__'  # TODO:
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class AuthorSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AlterAuthorSerializer(serializers.ModelSerializer):
+class AlterAuthorSerializer(serializers.ModelSerializer):  # TODO:
     class Meta:
         model = Author
         fields = ['id', 'name']
@@ -33,7 +33,7 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AlterGenreSerializer(serializers.ModelSerializer):
+class AlterGenreSerializer(serializers.ModelSerializer):  # TODO:
     class Meta:
         model = Genre
         fields = ['id', 'name']
@@ -45,7 +45,7 @@ class PublisherSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AlterPublisherSerializer(serializers.ModelSerializer):
+class AlterPublisherSerializer(serializers.ModelSerializer):  # TODO:
     class Meta:
         model = Publisher
         fields = ['id', 'name']
@@ -134,7 +134,7 @@ class ItemSerializer(serializers.ModelSerializer):
         ]
 
 
-class AlterItemSerializer(serializers.ModelSerializer):
+class AlterItemSerializer(serializers.ModelSerializer):   # TODO:
     type = serializers.CharField(source='get_type_item', read_only=True)
 
     class Meta:

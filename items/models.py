@@ -131,7 +131,7 @@ class Item(models.Model):
 
 
 class Book(Item):
-    author = models.ManyToManyField(to=Author)
+    author = models.ManyToManyField(to=Author)  # TODO:
     genre = models.ManyToManyField(to=Genre)
     language = models.ForeignKey(to=Language, on_delete=models.CASCADE, verbose_name=_('language'))
     publisher = models.ForeignKey(to=Publisher, on_delete=models.CASCADE, verbose_name=_('publisher'))

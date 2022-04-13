@@ -90,7 +90,7 @@ class InvoiceAdmin(admin.ModelAdmin):
         )
 
 
-class PurchaseAdmin(admin.ModelAdmin):
+class PurchaseAdmin(admin.ModelAdmin):  # TODO:
     readonly_fields = [
         'price'
     ]

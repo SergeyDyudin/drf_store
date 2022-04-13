@@ -47,7 +47,7 @@ class CartViewSet(viewsets.GenericViewSet, ListModelMixin):
 
         try:
             pay_the_cart(request, instance)
-        except Exception:
+        except Exception:  # noqa: Ловим и логируем всё
             logger.error('Оплата не прошла', exc_info=True)
             return Response({'error': 'Payment failed'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

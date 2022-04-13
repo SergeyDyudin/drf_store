@@ -87,11 +87,11 @@ class PostCustomUserSerializer(serializers.ModelSerializer):
 
     def validate(self, attrs):
         # Если задано только одно поле для пароля
-        if bool(attrs.get('password')) ^ bool(attrs.get('password2')):
+        if bool(attrs.get('password')) ^ bool(attrs.get('password2')):  # TODO:
             raise serializers.ValidationError({"password": "Password and password2 fields are required."})
 
         if attrs.get('password') and attrs.get('password2'):  # оба поля заданы
-            if attrs['password'] != attrs['password2']:
+            if attrs['password'] != attrs['password2']:  # TODO:
                 raise serializers.ValidationError({"password": "Password fields didn't match."})
             del attrs['password2']
 
@@ -117,7 +117,7 @@ class PostCustomUserSerializer(serializers.ModelSerializer):
     @transaction.atomic
     def update(self, instance, validated_data):
         profile_data = validated_data.pop('profile', None)
-        password = validated_data.pop('password', None)
+        password = validated_data.pop('password', None)   # TODO:
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
@@ -150,7 +150,7 @@ class ChangePasswordSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
-        if attrs['new_password1'] != attrs['new_password2']:
+        if attrs['new_password1'] != attrs['new_password2']:  # TODO:
             raise serializers.ValidationError({'new_password2': _("The two password fields didn't match.")})
         password_validation.validate_password(attrs['new_password1'], self.context['request'].user)
         return attrs

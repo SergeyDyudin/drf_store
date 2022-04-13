@@ -18,7 +18,7 @@ from services.models import Invoice, Purchase, Rent
 logger = logging.getLogger(__name__)
 
 
-def pay_the_cart(request, invoice: Invoice):
+def pay_the_cart(request, invoice: Invoice):  # TODO:
     """Оплата заказа в корзине"""
     invoice.status = Invoice.InvoiceStatuses.PAID.value
     invoice.status_updated = timezone.now()
@@ -58,7 +58,7 @@ def create_purchase(request, data: dict) -> None:
 
 
 @transaction.atomic
-def create_rent(request, data: dict) -> None:
+def create_rent(request, data: dict) -> None:  # TODO:
     """Создание сервиса аренды для товара (добавление в корзину)"""
     item = get_object_or_404(Item, pk=data['item'])
 

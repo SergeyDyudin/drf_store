@@ -90,7 +90,7 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
         return obj
 
 
-class ItemChildMixin:
+class ItemChildMixin:  # TODO: Классно
     """Получение queryset и serializer в соответствии с классом"""
     def get_queryset(self):
         self.model = self.get_model()
@@ -124,7 +124,7 @@ class BookViewSet(ItemChildMixin, viewsets.ModelViewSet):
         'retrieve': GetBookSerializer,
     }
 
-    # def get_queryset(self):
+    # def get_queryset(self):   # TODO:
     #     queryset = Book.objects.adult_control(self.request.user).prefetch_related('categories')
     #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
     #         return queryset.filter(categories__name=self.request.query_params.get('cat'))
@@ -145,7 +145,7 @@ class FigureViewSet(ItemChildMixin, viewsets.ModelViewSet):
         'retrieve': GetFigureSerializer,
     }
 
-    # def get_queryset(self):
+    # def get_queryset(self):   # TODO:
     #     queryset = Figure.objects.adult_control(self.request.user).prefetch_related('categories')
     #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
     #         return queryset.filter(categories__name=self.request.query_params.get('cat'))
@@ -166,7 +166,7 @@ class MagazineViewSet(ItemChildMixin, viewsets.ModelViewSet):
         'retrieve': GetMagazineSerializer,
     }
 
-    # def get_queryset(self):
+    # def get_queryset(self):   # TODO:
     #     queryset = Magazine.objects.adult_control(self.request.user).prefetch_related('categories')
     #     if self.request.query_params.get('cat') and (not self.request.query_params.get('cat') == 'Все'):
     #         return queryset.filter(categories__name=self.request.query_params.get('cat'))

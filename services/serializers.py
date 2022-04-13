@@ -26,7 +26,7 @@ class AlterPurchaseSerializer(serializers.ModelSerializer):
 
     def validate_quantity(self, value):
         """Проверка количество больше нуля"""
-        if value < 1:
+        if value < 1:  # TODO:
             raise serializers.ValidationError('Quantity must be greater than zero')
         return value
 

@@ -103,7 +103,7 @@ class Region(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(to=CustomUser, related_name='profile', on_delete=models.CASCADE)
     phone = models.CharField(_('Телефон'), max_length=20, validators=[validate_phone], blank=True)
-    birthday = models.DateField(_('Birthday'), blank=True, null=True)
+    birthday = models.DateField(_('Birthday'), blank=True, null=True)  # TODO:
     region = models.ForeignKey(to=Region, blank=True, null=True, on_delete=models.SET_NULL)
     currency = models.PositiveIntegerField(_('Virtual currency'), default=0, blank=True)
     email_confirmed = models.BooleanField(_('Email подтвержден'), default=False)
@@ -111,7 +111,7 @@ class Profile(models.Model):
     @property
     def age(self):
         if self.birthday is not None:
-            return timezone.now().year - self.birthday.year
+            return timezone.now().year - self.birthday.year  # TODO:
 
     @property
     @admin.display(description=_('Full name'))

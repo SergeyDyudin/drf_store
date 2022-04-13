@@ -1,13 +1,17 @@
 from django.db import models
-from django.db.models import Sum, F, Count, ExpressionWrapper, DurationField
+from django.db.models import Sum, F, Count, ExpressionWrapper, DurationField  # TODO:
 from django.db.models.functions import ExtractDay
 
 
 class InvoiceManager(models.Manager):
 
     def get_queryset(self):
-        qs = super(InvoiceManager, self).get_queryset().\
-            select_related('user_id').prefetch_related('rent_set', 'purchase_set')
+        qs = (
+            super(InvoiceManager, self)
+            .get_queryset()
+            .select_related('user_id')
+            .prefetch_related('rent_set', 'purchase_set')
+        )  # TODO:
         return qs
 
 

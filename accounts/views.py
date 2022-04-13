@@ -51,7 +51,7 @@ class CustomUserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)
-        return Response({"Password": f"Changed for id {user.id}"}, status=status.HTTP_200_OK)
+        return Response({"Password": f"Changed for id {user.id}"}, status=status.HTTP_200_OK)  # TODO:
 
     @action(methods=['post'], detail=False, permission_classes=[IsAuthenticated])
     def logout(self, request):
