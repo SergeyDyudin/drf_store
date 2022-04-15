@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from items.models import Author, Book, Brand, Category, Genre, Item, Publisher, Figure, Magazine, Language
+from items.models import (Author, Book, Brand, Category, Figure, Genre, Item,
+                          Language, Magazine, Publisher)
 
 
 class LanguageSerializer(serializers.ModelSerializer):

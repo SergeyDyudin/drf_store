@@ -1,11 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm, PasswordResetForm
+from django.contrib.auth.forms import (PasswordResetForm, UserChangeForm,
+                                       UserCreationForm)
 from django.db import ProgrammingError, connection
-
 from django.utils.translation import gettext as _
 
 from accounts.models import CustomUser, Profile, Region
-
 from utils.validators import validate_phone
 
 

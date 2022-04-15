@@ -1,12 +1,11 @@
 from django.contrib.auth import password_validation
-from django.db import transaction
-from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
+from django.db import transaction
 from django.utils.translation import gettext_lazy as _
+from rest_framework import serializers
 
 from accounts.models import CustomUser, Profile, Region
 from accounts.services import send_activation_email
-
 from utils.validators import validate_phone
 
 

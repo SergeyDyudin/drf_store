@@ -15,9 +15,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from django.utils.translation import gettext_lazy as _
-
 from dotenv import load_dotenv
-
 
 load_dotenv()
 

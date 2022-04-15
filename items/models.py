@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from items.managers import AdultFilteredItems, AdultFilteredCategory
+from items.managers import AdultFilteredCategory, AdultFilteredItems
 from utils.utils import transliterate_string
 
 

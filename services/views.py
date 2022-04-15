@@ -1,15 +1,17 @@
 import logging
 
 from django.db import transaction
-from rest_framework import viewsets, status
+from rest_framework import status, viewsets
 from rest_framework.generics import get_object_or_404
-from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.mixins import CreateModelMixin, ListModelMixin
 from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.response import Response
 
 from services.models import Invoice, Purchase, Rent
-from services.serializers import InvoiceSerializer, AlterPurchaseSerializer, CreateRentSerializer
-from services.services import pay_the_cart, create_purchase, create_rent, get_data_for_rent
+from services.serializers import (AlterPurchaseSerializer,
+                                  CreateRentSerializer, InvoiceSerializer)
+from services.services import (create_purchase, create_rent, get_data_for_rent,
+                               pay_the_cart)
 
 logger = logging.getLogger(__name__)
 

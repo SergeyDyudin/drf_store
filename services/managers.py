@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import F, ExpressionWrapper, DurationField
+from django.db.models import DurationField, ExpressionWrapper, F
 from django.db.models.functions import ExtractDay
 
 

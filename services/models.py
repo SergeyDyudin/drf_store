@@ -4,9 +4,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from accounts.models import CustomUser
+from drf_store import settings
 from items.models import Item
 from services.managers import InvoiceManager, RentManager, ServiceManager
-from drf_store import settings
 
 
 class Invoice(models.Model):

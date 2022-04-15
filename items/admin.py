@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from .models import Item, Book, Author, Category, Genre, Publisher, Language, Brand, Figure, Magazine
+from .models import (Author, Book, Brand, Category, Figure, Genre, Item,
+                     Language, Magazine, Publisher)
 
 
 class ItemAdmin(admin.ModelAdmin):

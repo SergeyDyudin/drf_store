@@ -5,9 +5,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_decode
-from django.views.generic import FormView
 from django.utils.translation import gettext_lazy as _
-from rest_framework import viewsets, status
+from django.views.generic import FormView
+from rest_framework import status, viewsets
 from rest_framework.decorators import action, api_view
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
@@ -18,8 +18,11 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from accounts.forms import SendEmailForm
 from accounts.models import CustomUser, Profile
 from accounts.permissions import UserPermission
-from accounts.serializers import GetCustomUserSerializer, PostCustomUserSerializer, \
-    PostProfileSerializer, GetProfileSerializer, ChangePasswordSerializer
+from accounts.serializers import (ChangePasswordSerializer,
+                                  GetCustomUserSerializer,
+                                  GetProfileSerializer,
+                                  PostCustomUserSerializer,
+                                  PostProfileSerializer)
 from accounts.tokens import account_activation_token
 
 logger = logging.getLogger(__name__)

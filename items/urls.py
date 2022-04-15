@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path, include
+from django.urls import include, path
 from rest_framework import routers
 
-from .views import LanguageViewSet, ItemViewSet, BookViewSet, MagazineViewSet, FigureViewSet, CategoryViewSet, \
-    AuthorViewSet, GenreViewSet, PublisherViewSet, BrandViewSet
+from .views import (AuthorViewSet, BookViewSet, BrandViewSet, CategoryViewSet,
+                    FigureViewSet, GenreViewSet, ItemViewSet, LanguageViewSet,
+                    MagazineViewSet, PublisherViewSet)
 
 app_name = 'items'
 

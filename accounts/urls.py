@@ -1,5 +1,5 @@
-from django.urls import path, re_path, reverse_lazy, include
 from django.contrib.auth import views as auth_view
+from django.urls import include, path, re_path, reverse_lazy
 from rest_framework import routers
 
 from . import views

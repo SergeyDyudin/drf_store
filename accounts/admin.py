@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.contrib.admin import display
 from django.contrib.auth.admin import UserAdmin
 from django.shortcuts import render
@@ -5,9 +6,8 @@ from django.urls import path
 from django.utils.translation import gettext_lazy as _
 
 from . import views
-from .forms import ProfileCreationForm, ProfileChangeForm
+from .forms import ProfileChangeForm, ProfileCreationForm
 from .models import CustomUser, Profile, Region
-from django.contrib import admin
 
 
 class RegionAdmin(admin.ModelAdmin):

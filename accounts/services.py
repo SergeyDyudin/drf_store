@@ -7,7 +7,6 @@ from django.utils.http import urlsafe_base64_encode
 
 from accounts.tokens import account_activation_token
 
-
 logger = logging.getLogger(__name__)
 
 

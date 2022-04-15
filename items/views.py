@@ -1,15 +1,20 @@
 import rest_framework.exceptions
 from django.contrib.contenttypes.models import ContentType
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets, filters
+from rest_framework import filters, viewsets
 from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 from items.filters import ItemFilter
-from items.models import Language, Item, Category, Author, Genre, Publisher, Brand
-from items.serializers import LanguageSerializer, ItemSerializer, GetBookSerializer, PostBookSerializer, \
-    PostFigureSerializer, GetFigureSerializer, GetMagazineSerializer, PostMagazineSerializer, CategorySerializer, \
-    AuthorSerializer, GenreSerializer, PublisherSerializer, BrandSerializer
+from items.models import (Author, Brand, Category, Genre, Item, Language,
+                          Publisher)
+from items.serializers import (AuthorSerializer, BrandSerializer,
+                               CategorySerializer, GenreSerializer,
+                               GetBookSerializer, GetFigureSerializer,
+                               GetMagazineSerializer, ItemSerializer,
+                               LanguageSerializer, PostBookSerializer,
+                               PostFigureSerializer, PostMagazineSerializer,
+                               PublisherSerializer)
 
 
 class LanguageViewSet(viewsets.ModelViewSet):

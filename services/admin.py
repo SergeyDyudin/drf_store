@@ -1,8 +1,9 @@
 from django.contrib import admin, messages
-from django.utils.translation import gettext_lazy as _, ngettext
+from django.utils.translation import gettext_lazy as _
+from django.utils.translation import ngettext
 
 from .filters import UnpaidOldInvoiceListFilter
-from .models import Purchase, Rent, Invoice
+from .models import Invoice, Purchase, Rent
 
 
 class PurchaseInlineAdmin(admin.StackedInline):
