@@ -117,10 +117,6 @@ class PostCustomUserSerializer(serializers.ModelSerializer):
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
-        if password:
-            instance.set_password(password)
-        instance.save()
-
         if profile_data:
             profile = Profile.objects.get(user=instance)
             for attr, value in profile_data.items():
