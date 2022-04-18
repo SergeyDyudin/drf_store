@@ -1,0 +1,48 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - book_store_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: book_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - store_network
+
+  book_store:
+    build: .
+    command: gunicorn drf_store.wsgi:application --bind 0.0.0.0:8000
+    container_name: book_store
+    env_file:
+      - .env
+    volumes:
+      - book_store_static:/drf_store/static
+      - book_store_media:/drf_store/media
+    networks:
+      - store_network
+    depends_on:
+      - postgres
+
+  nginx:
+    build: ./conf
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - book_store_static:/drf_store/static
+      - book_store_media:/drf_store/media
+    networks:
+      - store_network
+    depends_on:
+      - book_store
+
+networks:
+  store_network:
+
+volumes:
+  book_store_db: {}
+  book_store_static: {}
+  book_store_media: {}

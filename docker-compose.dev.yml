@@ -1,0 +1,35 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    volumes:
+      - book_store_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: book_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    networks:
+      - store_network
+
+  book_store:
+    build: .
+    container_name: book_store
+    command:
+      - python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/drf_store
+    env_file:
+      - .env
+    networks:
+      - store_network
+    depends_on:
+      - postgres
+
+networks:
+  store_network:
+
+volumes:
+  book_store_db:
