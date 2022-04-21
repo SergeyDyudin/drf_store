@@ -71,7 +71,7 @@ class GetCustomUserSerializer(serializers.ModelSerializer):
 class PostCustomUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
-    profile = PostProfileSerializer()
+    profile = PostProfileSerializer(required=False)
 
     class Meta:
         model = CustomUser
@@ -116,6 +116,7 @@ class PostCustomUserSerializer(serializers.ModelSerializer):
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
+        instance.save()
 
         if profile_data:
             profile = Profile.objects.get(user=instance)

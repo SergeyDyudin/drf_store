@@ -16,6 +16,6 @@ class UserPermission(permissions.BasePermission):
         if request.user.is_staff:
             return True
         if view.action in ('retrieve', 'update', 'partial_update', 'change_password'):
-            return bool(obj == request.user)
+            return bool(obj == request.user or obj == request.user.profile)
 
         return False
