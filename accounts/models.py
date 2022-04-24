@@ -138,4 +138,6 @@ class Profile(models.Model):
         super(Profile, self).save()
 
     def is_adult(self):
-        return True if self.age >= 18 else False
+        if self.age:
+            return True if self.age >= 18 else False
+        return False

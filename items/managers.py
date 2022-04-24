@@ -7,7 +7,7 @@ class ControlAdultMixin:
 
     @staticmethod
     def user_is_adult(user):
-        return hasattr(user, 'profile') and user.profile.is_adult()
+        return (hasattr(user, 'profile') and user.profile.is_adult()) or user.is_superuser
 
 
 class AdultFilteredItems(ControlAdultMixin, models.Manager):

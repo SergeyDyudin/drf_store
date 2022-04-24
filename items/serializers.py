@@ -104,7 +104,7 @@ class GetBookSerializer(serializers.ModelSerializer):
 
 
 class PostBookSerializer(serializers.ModelSerializer):
-    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True)
+    categories = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all(), many=True, required=False)
     author = serializers.PrimaryKeyRelatedField(queryset=Author.objects.all(), many=True)
     genre = serializers.PrimaryKeyRelatedField(queryset=Genre.objects.all(), many=True)
     language = serializers.PrimaryKeyRelatedField(queryset=Language.objects.all())
