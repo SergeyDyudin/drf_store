@@ -84,6 +84,18 @@ class TestBookViewSet:
 
         assert response.status_code == expected_status
 
+    def test_get_books_by_category(self, category_factory):
+        url = reverse('items:book-list')
+        categories = category_factory(2)
+        self.books[0].categories.add(*categories)
+        self.books[1].categories.add(*categories)
+        self.books[2].categories.add(categories[0])
+
+        response = self.client.get(url, data={'categories__name': categories[0]})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.json()) == 3
+
 
 class TestCategories:
 
