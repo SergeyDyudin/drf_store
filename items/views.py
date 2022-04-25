@@ -99,6 +99,11 @@ class ItemViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ItemChildMixin:
     """Получение queryset и serializer в соответствии с классом"""
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_class = ItemFilter
+    search_fields = ['title']
+    ordered_fields = ['price']
+
     def get_queryset(self):
         self.model = self.get_model()
         queryset = self.model.objects.adult_control(self.request.user).prefetch_related('categories')
