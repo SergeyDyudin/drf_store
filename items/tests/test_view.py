@@ -85,6 +85,29 @@ class TestBookViewSet:
         assert response.status_code == expected_status
 
 
+class TestCategories:
+
+    @pytest.fixture(autouse=True)
+    def initial(self, api_client, category_factory, adult_category):
+        self.client = api_client()
+        self.url = reverse('items:category-list')
+        self.adult_category = adult_category
+        self.categories = category_factory(5) + [self.adult_category]
+
+    @pytest.mark.parametrize('token, expected_count', [
+        (pytest.lazy_fixture('access_token_admin'), 6),
+        (pytest.lazy_fixture('access_token_adult_user'), 6),
+        (None, 5)
+    ])
+    def test_list_categories(self, token, expected_count):
+        if token:
+            self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
+        response = self.client.get(self.url)
+
+        assert response.status_code == status.HTTP_200_OK
+        assert len(response.data) == expected_count
+
+
 class TestAuthorViewSet:
     url_list = reverse('items:author-list')
 
