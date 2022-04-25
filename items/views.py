@@ -26,9 +26,12 @@ class LanguageViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     """Отображение доступных категорий"""
-    queryset = Category.objects.all()
+    # queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+
+    def get_queryset(self):
+        return Category.objects.adult_control(self.request.user)
 
 
 class AuthorViewSet(viewsets.ModelViewSet):

@@ -11,7 +11,7 @@ app_name = 'items'
 
 router = routers.DefaultRouter()
 router.register(r'languages', LanguageViewSet)
-router.register(r'categories', CategoryViewSet)
+router.register(r'categories', CategoryViewSet, basename='category')
 router.register(r'authors', AuthorViewSet)
 router.register(r'genres', GenreViewSet)
 router.register(r'publishers', PublisherViewSet)
