@@ -9,6 +9,8 @@ services:
       POSTGRES_DB: book_store
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
     networks:
       - store_network
 
@@ -16,6 +18,8 @@ services:
     build: .
     container_name: book_store
     command: gunicorn drf_store.wsgi:application --bind 0.0.0.0:8000
+    environment:
+      DB_HOST: postgres
     env_file:
       - .env
     volumes:
